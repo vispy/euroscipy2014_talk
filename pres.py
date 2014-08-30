@@ -210,10 +210,9 @@ slide.add_image('gpu.jpg', (0.4, 0.6), 0.4)
 
 slide = pres.add_slide("Goals")
 slide.add_text("  • Easy to install (Pure Python)", (0, 0.3), )
-slide.add_text("  • Easy to use, yet flexible -> modular", (0, 0.35), )
-slide.add_text("  • Interactive & fast, yet high quality -> good shaders", (0, 0.40), )
-slide.add_text("  • Interactive", (0, 0.45), )
-slide.add_text("  • Support for embedding in apps", (0, 0.5), )
+slide.add_text("  • Easy to use, yet flexible", (0, 0.35), )
+slide.add_text("  • Interactive & fast, yet high quality", (0, 0.40), )
+slide.add_text("  • Support for embedding in apps", (0, 0.45), )
 
 
 slide = pres.add_slide("About Vispy")
@@ -393,6 +392,7 @@ slide.add_text("  • vispy.scene ~ alpha status", (0, 0.25), )
 slide.add_text("  • also need picking, transparancy, collections, ...", (0, 0.3), )
 slide.add_text("  • vispy.mpl_plot experimental, but API stable", (0, 0.35), )
 
+slide.add_text("Sprint tomorrow!", (0, 0.45), )
 
 slide = pres.add_slide("Thank you!")
 slide.add_text("http://vispy.org", (0.5, 0.45), 16, 'center', color='b', bold=True)

@@ -184,7 +184,6 @@ pres = Presentation(show=True)
 
 ## Introduction
 
-
 slide = pres.add_slide()
 # slide.add_image('vispylogo.png', (0.42, 0.05), 0.16)
 slide.add_text("Introducing Vispy's high level modules:", (0.5, 0.5), 24, 'center', color='k', bold=True)
@@ -301,9 +300,8 @@ slide.add_text("  • can have 0 or more parents", (0, 0.35), )
 
 slide.add_text("Important subclasses:", (0, 0.5), bold=True)
 slide.add_text("  • Visual", (0, 0.55), )
-slide.add_text("  • Widget", (0, 0.6), )
-slide.add_text("  • ViewBox", (0, 0.65), )
-slide.add_text("  • Camera", (0, 0.7), )
+slide.add_text("  • ViewBox", (0, 0.6), )
+slide.add_text("  • Camera", (0, 0.65), )
 
 slide = pres.add_slide("vispy.scene (2)")
 slide.add_image('https://docs.google.com/drawings/d/1U4Ym8VhIi4CVftCf5wl1POzOryoP4kD9nhNIH7HPlD4/pub?w=1000', (-0.1, 0.2), 1.2)
@@ -342,7 +340,7 @@ slide = pres.add_slide("Scene demo - realtime signals ")
 realtimesignals = RealtimeSignals(parent=slide.scene)
 realtimesignals.set_transform('st', translate=(0, 0.2))
 
-slide = pres.add_slide("A use case of scenegraph: VR/AR")
+slide = pres.add_slide("How Cinoptics benefits from vispy")
 slide.add_text("  • Stereo images (same scene in two ViewBoxes)", (0, 0.2), )
 slide.add_text("  • Viewpoint (just move camera object)", (0, 0.25), )
 slide.add_image('hmd_open.png', (0.1, 0.4), 0.8)
@@ -361,7 +359,6 @@ slide.add_text("  • Requires MPL", (0, 0.4), )
 slide.add_text("vispy.plot:", (0, 0.5), bold=True)
 slide.add_text("  • ~ compatible with mpl.pyplot", (0, 0.55), )
 slide.add_text("  • No dependencies", (0, 0.6), )
-slide.add_text("  • More flexibility", (0, 0.65), )
 
 
 slide.add_text("Other interfaces?", (0, 0.75), bold=True)

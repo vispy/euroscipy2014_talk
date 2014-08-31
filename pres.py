@@ -1,8 +1,16 @@
+# -*- coding: utf-8 -*-
+
+"""
+The slides for the Vispy talk presented at Euroscipy 2014, implemented
+in Vispy.
+"""
+
 import itertools
 import os
 import hashlib
 
 import numpy as np
+
 import vispy
 from vispy import app
 from vispy import scene
@@ -12,17 +20,12 @@ from demovisuals import Video, Rain, Boids, Atom, RealtimeSignals, Raycasting
 
 import imageio
 
-# Shorthands
-from vispy.scene.visuals import Text
-from vispy.scene.visuals import Image
-
-
 LOAD_IMAGES_FROM_CACHE = True
 THIS_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 def load_image(url):
-    """ To read images/diagrams from GDrive and cahche them.
+    """ To read images/diagrams (some from the web/GDrive) and cahche them.
     """
     if not '/' in url:
         url = os.path.join(THIS_DIR, 'images', url)
@@ -71,10 +74,7 @@ class Presentation(scene.SceneCanvas):
         self.show_text = True
     
     def on_initialize(self, event):
-        gloo.set_state('translucent',
-        #blend=True,
-                       #blend_func=('src_alpha', 'one_minus_src_alpha'),
-                       depth_test=False)
+        gloo.set_state('translucent', depth_test=False)
 
     def on_resize(self, event):
         gloo.set_viewport(0, 0, *self.size)
@@ -145,13 +145,13 @@ class Slide(scene.widgets.ViewBox):
         return self.parent.parent
     
     def set_title(self, text):
-        text = Text(text, parent=self.scene, pos=(0.5, 0.1), 
+        text = scene.Text(text, parent=self.scene, pos=(0.5, 0.1), 
                     font_size=26, bold=True, color='#002233', 
                     font_manager=font_manager)
         return text
     
     def add_text(self, text, pos, size=20, anchor_x='left', **kwargs):
-        text = Text(text, parent=self.scene, pos=pos, font_size=size, 
+        text = scene.Text(text, parent=self.scene, pos=pos, font_size=size, 
                     anchor_x=anchor_x, anchor_y='center',
                     font_manager=font_manager, **kwargs)
         return text
@@ -159,7 +159,7 @@ class Slide(scene.widgets.ViewBox):
     def add_image(self, url, pos, size, **kwargs):
         # size is for width
         data = load_image(url)
-        im = Image(data)
+        im = scene.Image(data)
         im.add_parent(self.scene)
         im.transform = scene.transforms.STTransform()
         im.transform.scale = size / data.shape[1], size / data.shape[1]
@@ -171,7 +171,7 @@ class Slide(scene.widgets.ViewBox):
 
 class DrawingSystem(scene.systems.DrawingSystem):
     def _process_entity(self, event, entity, force_recurse=False):
-        if (not pres.show_text) and isinstance(entity, scene.visuals.Text):
+        if (not pres.show_text) and isinstance(entity, scene.Text):
             return
         else:
             scene.systems.DrawingSystem._process_entity(self, event, entity, force_recurse)
@@ -180,7 +180,9 @@ class DrawingSystem(scene.systems.DrawingSystem):
 # For more efficient fonts
 font_manager = scene.visuals.text.text.FontManager()
 
+# Create presentation object!
 pres = Presentation(show=True)
+
 
 ## Introduction
 
@@ -282,7 +284,7 @@ slide.add_text("  • Extensible: create your own visual", (0, 0.3), )
 slide.add_image('https://docs.google.com/drawings/d/1OIkoeI7NrOdZx5MI5IZB4zMXbOs0Cy9RE97mLyLxMII/pub?w=840', (0.1, 0.4), 0.8)
 
 slide = pres.add_slide("Visual demo - video")
-vid = Video((0.0, 0.4), 1.0, parent=slide.scene)
+vid = Video((0.0, 0.3), 1.0, parent=slide.scene)
 slide.events.key_press.connect(vid.swap_channel)
 
 

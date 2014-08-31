@@ -18,13 +18,33 @@ class SlideVisualMixin:
     
     def on_leave_slide(self, event=None):  # called by pres
         self._timer.stop()
-    
+
+
+class NoiseGen:
+    """ Act a bit like an imagio Reader object to generate noise images.
+    """
+    def __init__(self, w=400, h=250):
+        self._size = h, w, 3
+    def get_next_data(self):
+        return self.get_data()
+    def get_data(self, index=None):
+        return np.random.uniform(0, 255, self._size).astype(np.uint8)
+        
+
 class Video(scene.visuals.Image, SlideVisualMixin):
     
     def __init__(self, pos, size, **kwargs):
         
-        reader1 = imageio.read('<video0>', 'ffmpeg')
-        reader2 = imageio.read(os.path.join(os.path.expanduser('~'), 'Videos', 'ice age 4 trailer.mp4'), 'ffmpeg', loop=True)
+        reader1 = reader2 = NoiseGen()
+        try:
+            reader1 = imageio.read('<video0>', 'ffmpeg')
+        except Exception as err:
+            print('Could not load ffmpeg reader: %s' % str(err))
+        try:
+            reader2 = imageio.read(os.path.join(os.path.expanduser('~'), 'Videos', 'ice age 4 trailer.mp4'), 'ffmpeg', loop=True)
+        except Exception as err:
+            print('Could not load ffmpeg reader: %s' % str(err))
+        
         reader2.get_data(5*30)
         self._timer = app.Timer(1.0/30, connect=self.next_image)
         

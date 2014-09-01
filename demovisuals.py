@@ -767,7 +767,7 @@ class Raycasting(scene.Visual, SlideVisualMixin):
                 depth++;
             }
             
-            if (col==0 && v_position.y > 0.0) { // the biggest hack
+            if (col==vec3(0,0,0) && v_position.y > 0.0) { // the biggest hack
                discard;
                }
             return clamp(col, 0., 1.);

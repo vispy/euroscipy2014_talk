@@ -330,7 +330,7 @@ class Boids(scene.visuals.Visual, SlideVisualMixin):
             A + 0.01 * R + 0.0005 * T + 0.025 * dP
         boids['position'] += boids['velocity']
 
-        self.vbo_position.set_data(self._particles['position'])
+        self.vbo_position.set_data(self._particles['position'].copy())
 
         return t
 

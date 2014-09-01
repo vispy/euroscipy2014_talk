@@ -330,7 +330,7 @@ class Boids(scene.visuals.Visual, SlideVisualMixin):
             A + 0.01 * R + 0.0005 * T + 0.025 * dP
         boids['position'] += boids['velocity']
 
-        self.vbo_position.set_data(self._particles['position'])
+        self.vbo_position.set_data(self._particles['position'].copy())
 
         return t
 
@@ -767,7 +767,7 @@ class Raycasting(scene.Visual, SlideVisualMixin):
                 depth++;
             }
             
-            if (col==0 && v_position.y > 0.0) { // the biggest hack
+            if (col==vec3(0,0,0) && v_position.y > 0.0) { // the biggest hack
                discard;
                }
             return clamp(col, 0., 1.);
